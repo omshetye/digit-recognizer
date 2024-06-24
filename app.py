@@ -23,7 +23,7 @@ ffnn.load_state_dict(torch.load('mnist_model.pth', map_location=device))
 ffnn.eval()  # Set model to evaluation mode
 
 cnn = CNN()
-cnn.load_state_dict(torch.load('mnist_model_cnn.pth', map_location=device))
+cnn.load_state_dict(torch.load('quantized_mnist_model.pth', map_location=device))
 cnn.eval()  # Set model to evaluation mode
 
 
