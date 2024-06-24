@@ -10,7 +10,7 @@
 </head>
 
 <body>
-	<h1>Digit Recognizer using a Feed Forward Neural network</h1>
+	<h1>Digit Recognizer</h1>
 	<div class="container">
 		<div class="draw-title">Draw<br>a digit:</div>
 		<div class="canvas-div">
@@ -27,6 +27,13 @@
 				<div class="confidence" id="confidence"></div>
 			</div>
 		</div>
+	</div>
+	<h2>Select a model:</h2>
+	<div class="select-container">
+		<select id="model">
+			<option value="ffnn">Feed Forward Neural Network</option>
+			<option value="cnn">Convolution Neural Network</option>
+		</select>
 	</div>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
