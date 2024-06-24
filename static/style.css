@@ -9,7 +9,18 @@ html, body {
 
 h1 {
   color: rgb(121, 183, 235);
-  margin-top: 200px;
+  margin-top: 120px;
+  display: block;
+  text-align: center;
+  font-size: 1.92em;
+  font-weight: 600;
+  letter-spacing: -0.055em;
+}
+
+h2 {
+  color: rgb(121, 183, 235);
+  margin-top: 70px;
+  margin-bottom: 10px;
   display: block;
   text-align: center;
   font-size: 1.92em;
@@ -104,4 +115,28 @@ h1 {
   margin-right: 16px;
   margin-left: -32px;
   text-align: center;
+}
+
+.select-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+select {
+  font-size: 16px;
+  font-family: 'Montserrat Alternates', sans-serif;
+  padding: 5px 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: linear-gradient(148deg,#0f053c, #235963, #0b0525);
+  color: #fff;
+  text-align: center;
+}
+
+select option {
+  font-family: 'Montserrat Alternates', sans-serif;
+  background: linear-gradient(148deg,#0f053c, #235963, #0b0525);
+  color: #443434;
 }
