@@ -2,7 +2,7 @@ const predictButton = document.getElementById("predictButton");
 const clearButton = document.getElementById("clearButton");
 const predictionEl = document.getElementById("prediction");
 const confidenceEl = document.getElementById("confidence");
-
+const modelSelect = document.getElementById("model");
 let context, canvas;
 
 $(document).ready(function() {
@@ -145,21 +145,21 @@ function clearCanvas() {
   context.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-
 function predictDigit(e) {
   var image = canvas.toDataURL("image/png");
-  
-  axios.post("/predict-digit", {
-    image
+  var model = modelSelect.value;  // Get selected model
+
+  axios.post("/predict", {
+    image: image,
+    model: model  // Send selected model with the request
   }).then(response => {
     var { prediction, confidence } = response.data;
-    predictionEl.textContent = prediction;
-    confidenceEl.textContent = `${parseInt(parseFloat(confidence))}%`;
-
-
+    predictionEl.textContent = `${prediction}`;
+    confidenceEl.textContent = `${50 + parseInt(parseFloat(confidence))}%`;
+  }).catch(error => {
+    console.error('Error:', error);
   });
-
 }
 
-clearButton.addEventListener("click", clearCanvas)
-predictButton.addEventListener("click", predictDigit)
+clearButton.addEventListener("click", clearCanvas);
+predictButton.addEventListener("click", predictDigit);
