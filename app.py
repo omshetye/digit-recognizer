@@ -16,13 +16,13 @@ num_classes = 10
 
 app = Flask(__name__)
 
+device = torch.device('cpu') 
+
 ffnn = FFNN(input_size, hidden_size1, hidden_size2, hidden_size3, num_classes)
-device = torch.device('cpu')  # Load model on CPU
 ffnn.load_state_dict(torch.load('mnist_model.pth', map_location=device))
 ffnn.eval()  # Set model to evaluation mode
 
 cnn = CNN()
-device = torch.device('cpu')  # Load model on CPU
 cnn.load_state_dict(torch.load('mnist_model_cnn.pth', map_location=device))
 cnn.eval()  # Set model to evaluation mode
 
@@ -49,14 +49,11 @@ def predict_digit():
         ])
 
         img_tensor = transform(img)  # Add batch dimension
-        print(img_tensor.shape)
         if model_choice == 'ffnn':
             confidence, prediction = ffnn.predict(img_tensor)
         elif model_choice == 'cnn':
             confidence, prediction = cnn.predict(img_tensor)
-            print(prediction)
         confidence = float(confidence.item())
-        print(prediction)
         response = {
             "prediction": str(prediction),
             "confidence": str(confidence)
