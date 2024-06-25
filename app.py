@@ -20,7 +20,7 @@ app = Flask(__name__)
 ffnn = FFNN(input_size, hidden_size1, hidden_size2, hidden_size3, num_classes)
 device = torch.device('cpu')  # Load model on CPU
 ffnn.load_state_dict(torch.load('mnist_model.pth', map_location=device))
-ffnn.eval()  # Set model to evaluation mode
+ffnn.eval()  # Set model to evaluation modea
 
 onnx_model_path = 'cnn_model.onnx'
 ort_session = ort.InferenceSession(onnx_model_path, providers=["CPUExecutionProvider"]) 
@@ -62,15 +62,16 @@ def predict_digit():
         # Preprocess the image and convert to tensor
         img_tensor = preprocess_image(image_data)
 
-        if model_choice == 'ffnn':
-            # Predict using FFNN model
-            confidence, prediction = ffnn.predict(img_tensor)
         
-        elif model_choice == 'cnn':
+        if model_choice == 'cnn':
             # Predict using CNN model (ONNX)
             ort_outs = predict_with_onnx(img_tensor)
             prediction = np.argmax(ort_outs[0])
             confidence = np.max(ort_outs[0])
+
+        elif model_choice == 'ffnn':
+            # Predict using FFNN model
+            confidence, prediction = ffnn.predict(img_tensor)
 
         # Prepare response
         confidence = float(confidence.item())
@@ -80,9 +81,9 @@ def predict_digit():
         }
         
         return jsonify(response)
-    
+
     except Exception as e:
         return jsonify({"error": str(e)})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True)s
